@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import api from '@/lib/axios';
+import api from '../src/lib/axios';
 
 interface User {
   id: string;
