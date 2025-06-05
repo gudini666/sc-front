@@ -1,18 +1,20 @@
 import axios from 'axios';
 import config from '../config';
+import { storage } from '../utils/storage';
 
 const api = axios.create({
   baseURL: config.apiUrl,
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true // Важно для работы с CORS
 });
 
 // Add a request interceptor
 api.interceptors.request.use(
   (config) => {
     console.log('Making request to:', `${config.baseURL || ''}${config.url || ''}`);
-    const token = localStorage.getItem('token');
+    const token = storage.get('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
