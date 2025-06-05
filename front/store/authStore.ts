@@ -1,10 +1,12 @@
 import { create } from 'zustand';
-import axios from 'axios';
+import api from '@/lib/axios';
 
 interface User {
   id: string;
   username: string;
   email: string;
+  bio?: string;
+  avatarUrl?: string;
 }
 
 interface AuthState {
@@ -24,34 +26,34 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   login: async (email: string, password: string) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/login', {
+      const response = await api.post('/api/auth/login', {
         email,
-        password
+        password,
       });
 
-      const { token, user } = response.data.data;
+      const { token, user } = response.data;
       localStorage.setItem('token', token);
       set({ user, token, isAuthenticated: true });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Login error:', error);
-      throw new Error(error.response?.data?.message || 'Ошибка при входе');
+      throw error;
     }
   },
 
   register: async (username: string, email: string, password: string) => {
     try {
-      const response = await axios.post('http://localhost:3001/api/auth/register', {
+      const response = await api.post('/api/auth/register', {
         username,
         email,
-        password
+        password,
       });
 
-      const { token, user } = response.data.data;
+      const { token, user } = response.data;
       localStorage.setItem('token', token);
       set({ user, token, isAuthenticated: true });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Registration error:', error);
-      throw new Error(error.response?.data?.message || 'Ошибка при регистрации');
+      throw error;
     }
   },
 
@@ -68,18 +70,12 @@ export const useAuthStore = create<AuthState>((set) => ({
         return;
       }
 
-      const response = await axios.get('http://localhost:3001/api/auth/me', {
-        headers: {
-          Authorization: `Bearer ${token}`
-        }
-      });
-
-      const user = response.data.data;
-      set({ user, token, isAuthenticated: true });
+      const response = await api.get('/api/auth/me');
+      set({ user: response.data, token, isAuthenticated: true });
     } catch (error) {
       console.error('Auth check error:', error);
       localStorage.removeItem('token');
       set({ user: null, token: null, isAuthenticated: false });
     }
-  }
+  },
 })); 
