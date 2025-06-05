@@ -44,24 +44,24 @@ export default function TrackPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchTrack = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3001/api/tracks/${trackId}`, {
+    const fetchTrack = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/api/tracks/${trackId}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`
         }
-      });
-
-      if (response.data.success) {
-        setTrack(response.data.data);
-      }
+        });
+        
+        if (response.data.success) {
+          setTrack(response.data.data);
+        }
     } catch (error) {
       console.error('Error fetching track:', error);
       setError('Failed to load track');
-    } finally {
-      setLoading(false);
-    }
-  };
+      } finally {
+        setLoading(false);
+      }
+    };
 
   useEffect(() => {
     fetchTrack();
@@ -258,18 +258,18 @@ export default function TrackPage() {
           )}
           {/* Форма добавления комментария */}
           {currentUser ? (
-            <form onSubmit={handleComment} className="mt-6 flex gap-2">
-              <input
-                type="text"
+          <form onSubmit={handleComment} className="mt-6 flex gap-2">
+            <input
+              type="text"
                 value={comment}
                 onChange={e => setComment(e.target.value)}
-                placeholder="Добавить комментарий..."
-                className="flex-1 rounded-lg bg-gray-800 text-white px-4 py-2 focus:outline-none"
-              />
-              <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition">
-                Отправить
-              </button>
-            </form>
+              placeholder="Добавить комментарий..."
+              className="flex-1 rounded-lg bg-gray-800 text-white px-4 py-2 focus:outline-none"
+            />
+            <button type="submit" className="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-lg transition">
+              Отправить
+            </button>
+          </form>
           ) : (
             <div className="mt-6 p-4 bg-gray-800 rounded-lg">
               <p className="text-gray-400">

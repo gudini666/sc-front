@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuthStore } from '@/store/authStore';
 import axios from 'axios';
@@ -17,14 +17,21 @@ export default function UploadPage() {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [isClient, setIsClient] = useState(false);
+  const [showContent, setShowContent] = useState(false);
   const audioInputRef = useRef<HTMLInputElement>(null);
   const coverInputRef = useRef<HTMLInputElement>(null);
 
-  // Проверяем авторизацию при загрузке страницы
-  if (!user) {
-    router.push('/login');
-    return null;
-  }
+  useEffect(() => {
+    setIsClient(true);
+    if (!user) {
+      router.push('/login');
+    } else {
+      setShowContent(true);
+    }
+  }, [user, router]);
+
+  if (!showContent) return null;
 
   const handleAudioChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -77,6 +84,12 @@ export default function UploadPage() {
         audio: audioFile.name,
         cover: coverFile?.name
       });
+
+      if (!isClient) {
+        setError('Требуется клиентская среда');
+        setUploading(false);
+        return;
+      }
 
       const token = localStorage.getItem('token');
       console.log('Auth token:', token);

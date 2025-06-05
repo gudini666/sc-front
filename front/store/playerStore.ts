@@ -37,7 +37,7 @@ const loadInitialState = () => {
     };
   }
   return {
-    currentTrack: null,
+  currentTrack: null,
     isPlaying: false,
     savedTrackId: null
   };
