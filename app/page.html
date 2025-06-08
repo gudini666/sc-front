@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SoundCloud - Главная</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'sc-orange': '#ff5500',
+                        'sc-dark': '#121212',
+                        'sc-gray': '#333',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-sc-dark text-white">
+    <!-- Баннер для авторизованных пользователей -->
+    <div id="auth-banner" class="hidden bg-gradient-to-r from-sc-orange to-yellow-600 p-4 text-center">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center">
+                <i class="fas fa-crown mr-2"></i>
+                <span>Добро пожаловать назад, <span id="username" class="font-bold">Username</span>!</span>
+            </div>
+            <button onclick="closeBanner()" class="text-white hover:text-gray-200">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Основной контент -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Проверка авторизации (имитация) -->
+        <script>
+            // Имитация проверки авторизации
+            const isAuthenticated = false; // Поменяйте на true для теста баннера
+            const banner = document.getElementById('auth-banner');
+            
+            if(isAuthenticated) {
+                banner.classList.remove('hidden');
+                // Здесь можно добавить получение имени пользователя из localStorage/cookies
+                // document.getElementById('username').textContent = user.name;
+            }
+
+            function closeBanner() {
+                banner.classList.add('hidden');
+                // Можно сохранить в localStorage, что баннер закрыт
+                // localStorage.setItem('bannerClosed', 'true');
+            }
+        </script>
+
+        <!-- Рекомендации -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Рекомендуем вам</h2>
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Трек 1 -->
+                <div class="bg-sc-gray rounded-lg p-3 hover:bg-gray-700 transition cursor-pointer group">
+                    <div class="relative mb-3">
+                        <img src="https://source.unsplash.com/random/300x300/?music" alt="Обложка" class="w-full rounded-lg aspect-square object-cover">
+                        <button class="absolute bottom-2 right-2 w-10 h-10 bg-sc-orange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-play text-white"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-medium truncate">Название трека</h3>
+                    <p class="text-gray-400 text-sm truncate">Исполнитель</p>
+                </div>
+                
+                <!-- Трек 2 -->
+                <div class="bg-sc-gray rounded-lg p-3 hover:bg-gray-700 transition cursor-pointer group">
+                    <div class="relative mb-3">
+                        <img src="https://source.unsplash.com/random/300x300/?album" alt="Обложка" class="w-full rounded-lg aspect-square object-cover">
+                        <button class="absolute bottom-2 right-2 w-10 h-10 bg-sc-orange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-play text-white"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-medium truncate">Название трека</h3>
+                    <p class="text-gray-400 text-sm truncate">Исполнитель</p>
+                </div>
+                
+                <!-- Трек 3 -->
+                <div class="bg-sc-gray rounded-lg p-3 hover:bg-gray-700 transition cursor-pointer group">
+                    <div class="relative mb-3">
+                        <img src="https://source.unsplash.com/random/300x300/?concert" alt="Обложка" class="w-full rounded-lg aspect-square object-cover">
+                        <button class="absolute bottom-2 right-2 w-10 h-10 bg-sc-orange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-play text-white"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-medium truncate">Название трека</h3>
+                    <p class="text-gray-400 text-sm truncate">Исполнитель</p>
+                </div>
+                
+                <!-- Трек 4 -->
+                <div class="bg-sc-gray rounded-lg p-3 hover:bg-gray-700 transition cursor-pointer group">
+                    <div class="relative mb-3">
+                        <img src="https://source.unsplash.com/random/300x300/?vinyl" alt="Обложка" class="w-full rounded-lg aspect-square object-cover">
+                        <button class="absolute bottom-2 right-2 w-10 h-10 bg-sc-orange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-play text-white"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-medium truncate">Название трека</h3>
+                    <p class="text-gray-400 text-sm truncate">Исполнитель</p>
+                </div>
+                
+                <!-- Трек 5 -->
+                <div class="bg-sc-gray rounded-lg p-3 hover:bg-gray-700 transition cursor-pointer group">
+                    <div class="relative mb-3">
+                        <img src="https://source.unsplash.com/random/300x300/?dj" alt="Обложка" class="w-full rounded-lg aspect-square object-cover">
+                        <button class="absolute bottom-2 right-2 w-10 h-10 bg-sc-orange rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                            <i class="fas fa-play text-white"></i>
+                        </button>
+                    </div>
+                    <h3 class="font-medium truncate">Название трека</h3>
+                    <p class="text-gray-400 text-sm truncate">Исполнитель</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Новые релизы -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-bold mb-6">Новые релизы</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Альбом 1 -->
+                <div class="bg-sc-gray rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer">
+                    <img src="https://source.unsplash.com/random/600x600/?music" alt="Обложка" class="w-full aspect-square object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Название альбома</h3>
+                        <p class="text-gray-400 mb-3">Исполнитель</p>
+                        <button class="w-full bg-sc-orange text-white py-2 rounded-full font-medium hover:bg-orange-600 transition">
+                            Слушать
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Альбом 2 -->
+                <div class="bg-sc-gray rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer">
+                    <img src="https://source.unsplash.com/random/600x600/?album" alt="Обложка" class="w-full aspect-square object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Название альбома</h3>
+                        <p class="text-gray-400 mb-3">Исполнитель</p>
+                        <button class="w-full bg-sc-orange text-white py-2 rounded-full font-medium hover:bg-orange-600 transition">
+                            Слушать
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Альбом 3 -->
+                <div class="bg-sc-gray rounded-lg overflow-hidden hover:bg-gray-700 transition cursor-pointer">
+                    <img src="https://source.unsplash.com/random/600x600/?band" alt="Обложка" class="w-full aspect-square object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-lg mb-1">Название альбома</h3>
+                        <p class="text-gray-400 mb-3">Исполнитель</p>
+                        <button class="w-full bg-sc-orange text-white py-2 rounded-full font-medium hover:bg-orange-600 transition">
+                            Слушать
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Реализация баннера для авторизованных пользователей
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверяем, авторизован ли пользователь (в реальном приложении это будет проверка токена/cookie)
+            const isAuth = checkAuthStatus(); // Замените на реальную проверку
+            
+            if(isAuth) {
+                showAuthBanner();
+                
+                // Можно добавить таймер для автоматического скрытия
+                // setTimeout(() => {
+                //     document.getElementById('auth-banner').classList.add('hidden');
+                // }, 5000);
+            }
+        });
+
+        // Функция проверки авторизации (заглушка)
+        function checkAuthStatus() {
+            // В реальном приложении здесь будет проверка токена/cookie
+            return localStorage.getItem('isAuthenticated') === 'true'; // Для теста
+        }
+
+        // Показать баннер
+        function showAuthBanner() {
+            const banner = document.getElementById('auth-banner');
+            banner.classList.remove('hidden');
+            
+            // Получаем имя пользователя (заглушка)
+            const username = localStorage.getItem('username') || 'Пользователь';
+            document.getElementById('username').textContent = username;
+        }
+
+        // Закрыть баннер
+        function closeBanner() {
+            document.getElementById('auth-banner').classList.add('hidden');
+            // Можно сохранить в localStorage, что баннер закрыт
+            localStorage.setItem('bannerClosed', 'true');
+        }
+
+        // Для теста - имитация авторизации
+        // localStorage.setItem('isAuthenticated', 'true');
+        // localStorage.setItem('username', 'Алексей');
+    </script>
+</body>
+</html> 
